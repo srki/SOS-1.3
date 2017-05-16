@@ -243,6 +243,18 @@ SHMEM_DEFINE_FOR_AMO(SHMEM_DEF_ADD)
         return oldval;                                               \
     }
 
+#define SHMEM_DEF_FADD_NBI(STYPE,TYPE,ITYPE)                             \
+    void shmemx_##STYPE##_fadd_nbi(TYPE *oldval, TYPE *target, TYPE value, int pe)     \
+    {                                                                \
+        SHMEM_ERR_CHECK_INITIALIZED();                               \
+        SHMEM_ERR_CHECK_PE(pe);                                      \
+        SHMEM_ERR_CHECK_SYMMETRIC(target, sizeof(TYPE));             \
+                                                                     \
+        shmem_internal_fetch_atomic(target, &value, oldval,         \
+                                    sizeof(TYPE), pe,                \
+                                    SHM_INTERNAL_SUM, ITYPE, SHMEMX_CTX_DEFAULT);     \
+    }
+
 SHMEM_DEFINE_FOR_AMO(SHMEM_DEF_FADD)
 
 #define SHMEM_DEF_FETCH(STYPE,TYPE,ITYPE)                        \

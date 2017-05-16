@@ -155,3 +155,8 @@ SHMEM_DECLARE_FOR_EXTENDED_AMO(`SHMEMX_CTX_C_FETCH')
 define(`SHMEMX_CTX_C_SET',
 `void SHPRE()shmemx_ctx_$1_set($2 *target, $2 value, int pe, shmemx_ctx_t ctx)')dnl
 SHMEM_DECLARE_FOR_EXTENDED_AMO(`SHMEMX_CTX_C_SET')
+
+/* AMO: Atomic Fetch-and-Add Non-blocking Routines */
+define(`SHMEMX_C_FADD_NBI',
+`void SHPRE()shmemx_$1_fadd_nbi($2 *old, $2 *target, $2 value, int pe)')dnl
+SHMEM_DECLARE_FOR_AMO(`SHMEMX_C_FADD_NBI')
