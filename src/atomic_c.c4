@@ -243,6 +243,9 @@ SHMEM_DEFINE_FOR_AMO(SHMEM_DEF_ADD)
         return oldval;                                               \
     }
 
+SHMEM_DEFINE_FOR_AMO(SHMEM_DEF_FADD)
+
+
 #define SHMEM_DEF_FADD_NBI(STYPE,TYPE,ITYPE)                             \
     void shmemx_##STYPE##_fadd_nbi(TYPE *oldval, TYPE *target, TYPE value, int pe)     \
     {                                                                \
@@ -255,7 +258,7 @@ SHMEM_DEFINE_FOR_AMO(SHMEM_DEF_ADD)
                                     SHM_INTERNAL_SUM, ITYPE, SHMEMX_CTX_DEFAULT);     \
     }
 
-SHMEM_DEFINE_FOR_AMO(SHMEM_DEF_FADD)
+SHMEM_DEFINE_FOR_AMO(SHMEM_DEF_FADD_NBI)
 
 #define SHMEM_DEF_FETCH(STYPE,TYPE,ITYPE)                        \
     TYPE shmem_##STYPE##_fetch(const TYPE *source, int pe)       \
